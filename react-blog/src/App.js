@@ -15,6 +15,8 @@ import LoginForm from './page/LoginForm'
 import NavHeader from './components/NavHeader';
 import { useState } from 'react';
 
+let id = 3;
+
 function App() {
   // 데이터를 하위 컴퍼넌트에 전달하기위해서
   // 상위 컴퍼넌트에서 데이터를 작성하고 props값을 전달한다
@@ -50,6 +52,11 @@ function App() {
     ]
   );
 
+  // id값을 1씩 증가하는 함수
+  const addId = () => {
+    id = id + 1;
+  }
+
   // 주소와 페이지(컴퍼넌트 연결)
   return (
     <div className="App">
@@ -62,7 +69,10 @@ function App() {
           <Route path='/' element={<Home />}/>
           <Route path='/boardlist' element={<Boardlist boardlist={boardlist}/>}/>
           <Route path='/boardlist/:id' element={<Board boardlist={boardlist}/>}/>
-          <Route path='/boardform' element={<BoardForm />}/>
+          <Route path='/boardform' element={<BoardForm setBoardlist={setBoardlist}
+                                                        boardlist={boardlist}
+                                                        addId={addId}
+                                                        user={user} id={id}/>}/>
 
           <Route path='/loginform' element={<LoginForm setUser={setUser} />}/>
         </Routes>
